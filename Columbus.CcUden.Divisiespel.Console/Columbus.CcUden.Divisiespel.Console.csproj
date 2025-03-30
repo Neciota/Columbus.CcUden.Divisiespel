@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Columbus.CcUden.Divisiespel.Calculator\Columbus.CcUden.Divisiespel.Calculator.csproj" />
+    <ProjectReference Include="..\Columbus.CcUden.Divisiespel.Fetcher\Columbus.CcUden.Divisiespel.Fetcher.csproj" />
+    <ProjectReference Include="..\Columbus.CcUden.Divisiespel.Models\Columbus.CcUden.Divisiespel.Models.csproj" />
+    <ProjectReference Include="..\Columbus.CcUden.Divisiespel.Writer\Columbus.CcUden.Divisiespel.Writer.csproj" />
+  </ItemGroup>
+
+</Project>
