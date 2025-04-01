@@ -1,4 +1,5 @@
-﻿using Columbus.CcUden.Divisiespel.Fetcher;
+﻿using Columbus.CcUden.Divisiespel.Calculator;
+using Columbus.CcUden.Divisiespel.Fetcher;
 using Columbus.CcUden.Divisiespel.Models;
 using System.Globalization;
 using System.Web;
@@ -8,10 +9,12 @@ CompuClubFetcher fetcher = new(htmlParser);
 await fetcher.TryUpdateSessionIdAsync();
 
 int year;
-while (!int.TryParse(Console.ReadLine(), NumberStyles.Integer, CultureInfo.InvariantCulture, out year))
+
+do
 {
     Console.WriteLine("Select year: ");
 }
+while (!int.TryParse(Console.ReadLine(), NumberStyles.Integer, CultureInfo.InvariantCulture, out year));
 await fetcher.SetYear(year);
 
 IEnumerable<string> paths = await fetcher.GetCcFlightLinks();
@@ -33,3 +36,9 @@ while (selectedPath is null)
 IEnumerable<ResultLine> results = await fetcher.GetResults(selectedPath);
 foreach (ResultLine result in results)
     Console.WriteLine($"{result.Position,-3} {result.Name,-20} {result.City,-20} {result.ClubId,-4} {result.AmountInFlight,-5} {result.PigeonId,-10} {result.Rank,-3} {result.Distance,-7} {result.Arrival:HH-mm-ss,-8} {result.Speed,-8} {result.Points,-7} {result.TimeDifference,-8}");
+
+Console.WriteLine("========================================================================");
+
+IEnumerable<OwnerResult> ownerResults = Calculator.GetOwnerResultsFromSingleFlight(results);
+foreach (OwnerResult ownerResult in ownerResults)
+    Console.WriteLine($"{ownerResult.Name,-20} {ownerResult.Occurences,-1} {ownerResult.HasDesignated}");

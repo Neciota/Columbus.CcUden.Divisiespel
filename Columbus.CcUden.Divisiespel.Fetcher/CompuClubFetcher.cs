@@ -83,7 +83,7 @@ namespace Columbus.CcUden.Divisiespel.Fetcher
             ResultsPage initialResultsPage = _htmlParser.GetResultsPage(await initialPageResponse.Content.ReadAsStringAsync());
 
             IEnumerable<ResultLine> totalResults = initialResultsPage.ResultLines;
-            foreach (var page in initialResultsPage.OtherPages)
+            foreach (var page in initialResultsPage.OtherPages.Skip(1)) // The first page results are already included
             {
                 HttpRequestMessage pageRequest = new(HttpMethod.Get, $"/uitslag/{page}");
                 HttpResponseMessage pageResponse = await _httpClient.SendAsync(pageRequest);
