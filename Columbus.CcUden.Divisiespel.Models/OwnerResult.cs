@@ -17,5 +17,7 @@
         /// True if one of the top 2 designated pigeons has occurred in the results, false if not.
         /// </summary>
         public bool HasDesignated { get; set; }
+
+        public int GetPoints() => Occurences + (HasDesignated ? 1 : 0);
     }
 }

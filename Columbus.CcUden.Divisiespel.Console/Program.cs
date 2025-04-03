@@ -1,44 +1,32 @@
 ﻿using Columbus.CcUden.Divisiespel.Calculator;
+using Columbus.CcUden.Divisiespel.Console;
+using Columbus.CcUden.Divisiespel.Console.Pages;
 using Columbus.CcUden.Divisiespel.Fetcher;
-using Columbus.CcUden.Divisiespel.Models;
-using System.Globalization;
-using System.Web;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-IHtmlParser htmlParser = new HtmlParser();
-CompuClubFetcher fetcher = new(htmlParser);
-await fetcher.TryUpdateSessionIdAsync();
+HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
-int year;
+#region Logic
+builder.Services.AddScoped<IHtmlParser, HtmlParser>();
+builder.Services.AddScoped<CompuClubFetcher>();
+builder.Services.AddScoped<IStandingsCalculator, StandingsCalculator>();
+#endregion
 
-do
-{
-    Console.WriteLine("Select year: ");
-}
-while (!int.TryParse(Console.ReadLine(), NumberStyles.Integer, CultureInfo.InvariantCulture, out year));
-await fetcher.SetYear(year);
+#region Stores
+builder.Services.AddScoped<YearStore>();
+#endregion
 
-IEnumerable<string> paths = await fetcher.GetCcFlightLinks();
-Console.WriteLine("Available flights for CC Uden: ");
-foreach (string path in paths)
-{
-    var queryParams = HttpUtility.ParseQueryString(path);
-    Console.WriteLine(queryParams["vlc"]);
-}
+#region Pages
+builder.Services.AddScoped<Router>();
+builder.Services.AddTransient<HomePage>();
+builder.Services.AddTransient<AddFlightPage>();
+builder.Services.AddTransient<EditYearPage>();
+builder.Services.AddTransient<ViewAddedFlightsPage>();
+builder.Services.AddTransient<ViewStandingsPage>();
+#endregion
 
-string? selectedPath = null;
-while (selectedPath is null)
-{
-    Console.WriteLine("Select a flight: ");
-    string? input = Console.ReadLine();
-    selectedPath = paths.FirstOrDefault(p => p.Contains($"vlc={input}", StringComparison.InvariantCultureIgnoreCase));
-}
+var host = builder.Build();
 
-IEnumerable<ResultLine> results = await fetcher.GetResults(selectedPath);
-foreach (ResultLine result in results)
-    Console.WriteLine($"{result.Position,-3} {result.Name,-20} {result.City,-20} {result.ClubId,-4} {result.AmountInFlight,-5} {result.PigeonId,-10} {result.Rank,-3} {result.Distance,-7} {result.Arrival:HH-mm-ss,-8} {result.Speed,-8} {result.Points,-7} {result.TimeDifference,-8}");
-
-Console.WriteLine("========================================================================");
-
-IEnumerable<OwnerResult> ownerResults = Calculator.GetOwnerResultsFromSingleFlight(results);
-foreach (OwnerResult ownerResult in ownerResults)
-    Console.WriteLine($"{ownerResult.Name,-20} {ownerResult.Occurences,-1} {ownerResult.HasDesignated}");
+Router router = host.Services.GetRequiredService<Router>();
+await router.NavigateToAsync<HomePage>();

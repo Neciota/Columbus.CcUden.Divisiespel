@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Columbus.CcUden.Divisiespel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Columbus.CcUden.Divisiespel.Models", "Columbus.CcUden.Divisiespel.Models\Columbus.CcUden.Divisiespel.Models.csproj", "{263F3E07-9657-4DB9-ACB0-AFA092DEF39E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Columbus.CcUden.Divisiespel.Console", "Columbus.CcUden.Divisiespel.Console\Columbus.CcUden.Divisiespel.Console.csproj", "{DE05C28B-9C89-4CEC-BC82-0CA28F8407D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Columbus.CcUden.Divisiespel.Console", "Columbus.CcUden.Divisiespel.Console\Columbus.CcUden.Divisiespel.Console.csproj", "{DE05C28B-9C89-4CEC-BC82-0CA28F8407D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
