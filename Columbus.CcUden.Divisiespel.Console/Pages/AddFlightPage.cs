@@ -24,7 +24,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             await base.ShowAsync();
 
             await InitializeSessionAsync();
-            (string flightCode, string path) = await GetFlightPathAsync();
+            (FlightCode flightCode, string path) = await GetFlightPathAsync();
             IEnumerable<OwnerResult> ownerResults = await GetOwnerResultsAsync(flightCode, path);
             await ShowOwnerResults(ownerResults, flightCode);
         }
@@ -42,7 +42,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                 });
         }
 
-        private async Task<(string, string)> GetFlightPathAsync()
+        private async Task<(FlightCode, string)> GetFlightPathAsync()
         {
             IEnumerable<string> paths = [];
             await AnsiConsole.Status()
@@ -59,18 +59,18 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                 .Cast<string>()
                 .ToArray();
 
-            string selectedFlightCode = AnsiConsole.Prompt(
+            FlightCode selectedFlightCode = new(AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("Selecteer een vluchtcode:")
                     .PageSize(10)
                     .MoreChoicesText("[grey](Beweeg omhoog/omlaag om meer vluchtcodes te zien.)[/]")
                     .AddChoices(flightCodes)
                     .EnableSearch()
-                    .SearchPlaceholderText("Type om te zoeken."));
+                    .SearchPlaceholderText("Type om te zoeken.")));
             return (selectedFlightCode, paths.First(p => p.Contains($"vlc={selectedFlightCode}", StringComparison.InvariantCultureIgnoreCase)));
         }
 
-        private async Task<IEnumerable<OwnerResult>> GetOwnerResultsAsync(string flightCode, string path)
+        private async Task<IEnumerable<OwnerResult>> GetOwnerResultsAsync(FlightCode flightCode, string path)
         {
             IEnumerable<ResultLine> results = [];
             await AnsiConsole.Status()
@@ -85,7 +85,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             return _calculator.GetOwnerResultsFromSingleFlight(results);
         }
 
-        private async Task ShowOwnerResults(IEnumerable<OwnerResult> ownerResults, string flightCode)
+        private async Task ShowOwnerResults(IEnumerable<OwnerResult> ownerResults, FlightCode flightCode)
         {
             Table table = new();
             table.AddColumn("Naam");

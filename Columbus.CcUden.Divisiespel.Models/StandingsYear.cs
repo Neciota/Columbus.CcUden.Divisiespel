@@ -12,9 +12,9 @@
         /// <summary>
         /// The results per flight.
         /// </summary>
-        public Dictionary<string, IEnumerable<OwnerResult>> OwnerResultByFlight { get; set; } = [];
+        public Dictionary<FlightCode, IEnumerable<OwnerResult>> OwnerResultByFlight { get; set; } = [];
 
-        public string[] GetFlights() => OwnerResultByFlight
+        public FlightCode[] GetFlights() => OwnerResultByFlight
             .Keys
             .Order()
             .ToArray();
@@ -23,7 +23,7 @@
             .Distinct()
             .Order()
             .ToArray();
-        public Dictionary<(string Flight, string OwnerName), int> GetPointsByOwnerAndFlight() => OwnerResultByFlight
+        public Dictionary<(FlightCode Flight, string OwnerName), int> GetPointsByOwnerAndFlight() => OwnerResultByFlight
             .SelectMany(flight => flight.Value.Select(result => (flight.Key, result)))
             .ToDictionary(x => (x.Key, x.result.Name), x => x.result.GetPoints());
     }

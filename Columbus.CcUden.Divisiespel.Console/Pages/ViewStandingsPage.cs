@@ -18,13 +18,13 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             Table table = new();
 
             table.AddColumn("Liefhebber");
-            string[] flights = standingsYear.GetFlights();
+            FlightCode[] flights = standingsYear.GetFlights();
             foreach (var flight in flights)
-                table.AddColumn(flight);
+                table.AddColumn(flight.ToString());
             table.AddColumn("Totaal");
 
             string[] allOwners = standingsYear.GetAllOwners();
-            Dictionary<(string Flight, string Name), int> pointsByOwnerFlight = standingsYear.GetPointsByOwnerAndFlight();
+            Dictionary<(FlightCode Flight, string Name), int> pointsByOwnerFlight = standingsYear.GetPointsByOwnerAndFlight();
             foreach (var owner in allOwners)
             {
                 IEnumerable<int> points = flights.Select(flight => pointsByOwnerFlight.GetValueOrDefault((flight, owner), 0));
