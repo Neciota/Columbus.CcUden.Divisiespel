@@ -1,9 +1,8 @@
 ﻿using Columbus.CcUden.Divisiespel.Calculator;
 using Columbus.CcUden.Divisiespel.Fetcher;
 using Columbus.CcUden.Divisiespel.Models;
-using Columbus.CcUden.Divisiespel.Writer;
+using Columbus.CcUden.Divisiespel.Persistence;
 using Spectre.Console;
-using System.IO;
 using System.Web;
 
 namespace Columbus.CcUden.Divisiespel.Console.Pages
@@ -65,7 +64,9 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                     .Title("Selecteer een vluchtcode:")
                     .PageSize(10)
                     .MoreChoicesText("[grey](Beweeg omhoog/omlaag om meer vluchtcodes te zien.)[/]")
-                    .AddChoices(flightCodes));
+                    .AddChoices(flightCodes)
+                    .EnableSearch()
+                    .SearchPlaceholderText("Type om te zoeken."));
             return (selectedFlightCode, paths.First(p => p.Contains($"vlc={selectedFlightCode}", StringComparison.InvariantCultureIgnoreCase)));
         }
 
@@ -96,7 +97,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             AnsiConsole.Write(table);
 
             var shouldStoreResults = AnsiConsole.Prompt(
-                new TextPrompt<bool>("Resultaten opslaan.")
+                new TextPrompt<bool>("Resultaten opslaan?")
                     .AddChoice(true)
                     .AddChoice(false)
                     .WithConverter(choice => choice ? "j" : "n"));

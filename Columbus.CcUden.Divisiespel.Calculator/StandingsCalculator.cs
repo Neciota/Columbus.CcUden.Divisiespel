@@ -23,7 +23,8 @@ namespace Columbus.CcUden.Divisiespel.Calculator
         public StandingsYear GetUpdatedStandingsFromResults(StandingsYear standingsYear, string flightCode, IEnumerable<OwnerResult> ownerResults)
         {
             IEnumerable<string> allOwnerNames = standingsYear.OwnerStandings.Select(x => x.Name)
-                .Concat(ownerResults.Select(x => x.Name));
+                .Concat(ownerResults.Select(x => x.Name))
+                .Distinct();
             Dictionary<string, OwnerResult> ownerResultsByName = ownerResults.ToDictionary(x => x.Name);
             Dictionary<string, StandingsOwner> standingsOwnersByName = standingsYear.OwnerStandings.ToDictionary(x => x.Name);
 

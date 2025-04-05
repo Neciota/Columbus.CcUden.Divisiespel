@@ -2,7 +2,7 @@
 using Columbus.CcUden.Divisiespel.Console;
 using Columbus.CcUden.Divisiespel.Console.Pages;
 using Columbus.CcUden.Divisiespel.Fetcher;
-using Columbus.CcUden.Divisiespel.Writer;
+using Columbus.CcUden.Divisiespel.Persistence;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

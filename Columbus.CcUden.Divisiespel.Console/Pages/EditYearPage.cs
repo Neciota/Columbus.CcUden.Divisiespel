@@ -12,8 +12,6 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
 
             int year = AnsiConsole.Prompt(new TextPrompt<int>("Jaar:"));
             _yearStore.Year = year;
-
-            await _router.NavigateToAsync<HomePage>();
         }
     }
 }

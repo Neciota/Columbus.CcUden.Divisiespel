@@ -1,7 +1,7 @@
 ﻿using Columbus.CcUden.Divisiespel.Models;
 using System.Text.Json;
 
-namespace Columbus.CcUden.Divisiespel.Writer
+namespace Columbus.CcUden.Divisiespel.Persistence
 {
     public class StandingsStore()
     {
