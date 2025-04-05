@@ -4,9 +4,8 @@ using Spectre.Console;
 
 namespace Columbus.CcUden.Divisiespel.Console.Pages
 {
-    internal class ViewStandingsPage(Router router, YearStore yearStore, StandingsStore standingsStore) : Page(router)
+    internal class ViewStandingsPage(Router router, YearStore yearStore, StandingsStore standingsStore) : Page(router, yearStore)
     {
-        private readonly YearStore _yearStore = yearStore;
         private readonly StandingsStore _standingsStore = standingsStore;
 
         public override async Task ShowAsync()

@@ -2,15 +2,15 @@
 
 namespace Columbus.CcUden.Divisiespel.Console.Pages
 {
-    internal class HomePage(Router router, YearStore yearStore) : Page(router)
+    internal class HomePage(Router router, YearStore yearStore) : Page(router, yearStore)
     {
         private const string SEE_ADDED_FLIGHTS = "Reeds toegevoegde vluchten bekijken.";
         private const string SEE_CURRENT_STANDINGS = "Huidige stand bekijken.";
         private const string ADD_FLIGHT = "Vlucht toevoegen.";
         private const string EDIT_YEAR = "Jaartal aanpassen.";
+        private const string SEE_EXCLUDED_OWNERS = "Uitgesloten liefhebbers bekijken.";
         private const string EXIT = "Afsluiten.";
 
-        private readonly YearStore _yearStore = yearStore;
         private bool _keepAlive = true;
 
         public override async Task ShowAsync()
@@ -18,13 +18,6 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             do
             {
                 await base.ShowAsync();
-
-                var year = new Panel($"Jaar: {_yearStore.Year}")
-                    .Border(BoxBorder.Square)
-                    .Padding(1, 1)
-                    .Expand();
-
-                AnsiConsole.Write(year);
 
                 string result = AnsiConsole.Console.Prompt(new SelectionPrompt<string>()
                     .Title("Navigeer naar een pagina:")
@@ -35,6 +28,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                         SEE_CURRENT_STANDINGS,
                         ADD_FLIGHT,
                         EDIT_YEAR,
+                        SEE_EXCLUDED_OWNERS,
                         EXIT
                     ));
 
@@ -44,6 +38,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                     SEE_CURRENT_STANDINGS => _router.NavigateToAsync<ViewStandingsPage>(),
                     ADD_FLIGHT => _router.NavigateToAsync<AddFlightPage>(),
                     EDIT_YEAR => _router.NavigateToAsync<EditYearPage>(),
+                    SEE_EXCLUDED_OWNERS => _router.NavigateToAsync<ExcludedOwnersPage>(),
                     EXIT => ShutdownAsync(),
                     _ => throw new NotImplementedException($"No implementation for option {result}.")
                 };

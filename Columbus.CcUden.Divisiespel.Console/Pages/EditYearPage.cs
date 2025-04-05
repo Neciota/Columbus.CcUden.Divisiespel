@@ -2,10 +2,8 @@
 
 namespace Columbus.CcUden.Divisiespel.Console.Pages
 {
-    internal class EditYearPage(Router router, YearStore yearStore) : Page(router)
+    internal class EditYearPage(Router router, YearStore yearStore) : Page(router, yearStore)
     {
-        private readonly YearStore _yearStore = yearStore;
-
         public override async Task ShowAsync()
         {
             await base.ShowAsync();

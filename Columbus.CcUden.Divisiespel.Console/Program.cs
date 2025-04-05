@@ -12,11 +12,11 @@ HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddScoped<IHtmlParser, HtmlParser>();
 builder.Services.AddScoped<CompuClubFetcher>();
 builder.Services.AddScoped<IStandingsCalculator, StandingsCalculator>();
-builder.Services.AddScoped<StandingsStore>();
 #endregion
 
 #region Stores
 builder.Services.AddScoped<YearStore>();
+builder.Services.AddScoped<StandingsStore>();
 #endregion
 
 #region Pages
@@ -24,6 +24,7 @@ builder.Services.AddScoped<Router>();
 builder.Services.AddTransient<HomePage>();
 builder.Services.AddTransient<AddFlightPage>();
 builder.Services.AddTransient<EditYearPage>();
+builder.Services.AddTransient<ExcludedOwnersPage>();
 builder.Services.AddTransient<ViewAddedFlightsPage>();
 builder.Services.AddTransient<ViewStandingsPage>();
 #endregion

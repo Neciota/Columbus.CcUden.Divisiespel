@@ -12,11 +12,10 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
         CompuClubFetcher fetcher, 
         IStandingsCalculator standingsCalculator,
         YearStore yearStore,
-        StandingsStore standingsStore) : Page(router)
+        StandingsStore standingsStore) : Page(router, yearStore)
     {
         private readonly CompuClubFetcher _fetcher = fetcher;
         private readonly IStandingsCalculator _calculator = standingsCalculator;
-        private readonly YearStore _yearStore = yearStore;
         private readonly StandingsStore _standingsStore = standingsStore;
 
         public override async Task ShowAsync()

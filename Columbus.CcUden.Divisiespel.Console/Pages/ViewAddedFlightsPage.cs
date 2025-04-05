@@ -4,20 +4,13 @@ using Spectre.Console;
 
 namespace Columbus.CcUden.Divisiespel.Console.Pages
 {
-    internal class ViewAddedFlightsPage(Router router, YearStore yearStore, StandingsStore standingsStore) : Page(router)
+    internal class ViewAddedFlightsPage(Router router, YearStore yearStore, StandingsStore standingsStore) : Page(router, yearStore)
     {
-        private readonly YearStore _yearStore = yearStore;
         private readonly StandingsStore _standingsStore = standingsStore;
 
         public override async Task ShowAsync()
         {
             await base.ShowAsync();
-
-            var year = new Panel($"Jaar: {_yearStore.Year}")
-                .Border(BoxBorder.Square)
-                .Padding(1, 1)
-                .Expand();
-            AnsiConsole.Write(year);
 
             StandingsYear standingsYear = await _standingsStore.GetByYearAsync(_yearStore.Year);
 
