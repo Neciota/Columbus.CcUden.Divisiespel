@@ -22,23 +22,13 @@ namespace Columbus.CcUden.Divisiespel.Calculator
 
         public StandingsYear GetUpdatedStandingsFromResults(StandingsYear standingsYear, string flightCode, IEnumerable<OwnerResult> ownerResults)
         {
-            IEnumerable<string> allOwnerNames = standingsYear.OwnerStandings.Select(x => x.Name)
-                .Concat(ownerResults.Select(x => x.Name))
-                .Distinct();
-            Dictionary<string, OwnerResult> ownerResultsByName = ownerResults.ToDictionary(x => x.Name);
-            Dictionary<string, StandingsOwner> standingsOwnersByName = standingsYear.OwnerStandings.ToDictionary(x => x.Name);
-
-            List<StandingsOwner> newOwnerStandings = allOwnerNames.Select(name => new StandingsOwner
-            {
-                Name = name,
-                Points = ownerResultsByName.GetValueOrDefault(name)?.GetPoints() ?? 0 + (standingsOwnersByName.GetValueOrDefault(name)?.Points ?? 0),
-            }).ToList();
+            var newResultsPerFlight = standingsYear.OwnerResultByFlight.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            newResultsPerFlight.Add(flightCode, ownerResults);
 
             return new StandingsYear
             {
                 Year = standingsYear.Year,
-                FlightCodes = [flightCode, .. standingsYear.FlightCodes],
-                OwnerStandings = newOwnerStandings,
+                OwnerResultByFlight = newResultsPerFlight,
             };
         }
     }
