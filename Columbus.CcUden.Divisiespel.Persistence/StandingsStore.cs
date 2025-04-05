@@ -17,8 +17,13 @@ namespace Columbus.CcUden.Divisiespel.Writer
                 Directory.CreateDirectory(_saveFolder);
 
             string saveFile = GetFilePathForYear(year);
-            await using FileStream saveStream = File.OpenRead(saveFile);
-            _loadedStandings = await JsonSerializer.DeserializeAsync<StandingsYear>(saveStream) ?? new StandingsYear { Year = year };
+            if (File.Exists(saveFile))
+            {
+                await using FileStream saveStream = File.OpenRead(saveFile);
+                _loadedStandings = await JsonSerializer.DeserializeAsync<StandingsYear>(saveStream);
+            }
+
+            _loadedStandings ??= new StandingsYear { Year = year };
             return _loadedStandings;
         }
 

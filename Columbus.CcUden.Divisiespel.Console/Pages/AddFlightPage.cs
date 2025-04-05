@@ -1,6 +1,7 @@
 ﻿using Columbus.CcUden.Divisiespel.Calculator;
 using Columbus.CcUden.Divisiespel.Fetcher;
 using Columbus.CcUden.Divisiespel.Models;
+using Columbus.CcUden.Divisiespel.Writer;
 using Spectre.Console;
 using System.IO;
 using System.Web;
@@ -11,11 +12,13 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
         Router router, 
         CompuClubFetcher fetcher, 
         IStandingsCalculator standingsCalculator,
-        YearStore yearStore) : Page(router)
+        YearStore yearStore,
+        StandingsStore standingsStore) : Page(router)
     {
         private readonly CompuClubFetcher _fetcher = fetcher;
         private readonly IStandingsCalculator _calculator = standingsCalculator;
         private readonly YearStore _yearStore = yearStore;
+        private readonly StandingsStore _standingsStore = standingsStore;
 
         public override async Task ShowAsync()
         {
@@ -24,9 +27,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             await InitializeSessionAsync();
             (string flightCode, string path) = await GetFlightPathAsync();
             IEnumerable<OwnerResult> ownerResults = await GetOwnerResultsAsync(flightCode, path);
-
-            //foreach (OwnerResult ownerResult in ownerResults)
-            //    Console.WriteLine($"{ownerResult.Name,-20} {ownerResult.Occurences,-1} {ownerResult.HasDesignated}");
+            await ShowOwnerResults(ownerResults, flightCode);
         }
 
         private async Task InitializeSessionAsync()
@@ -81,6 +82,31 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                 });
 
             return _calculator.GetOwnerResultsFromSingleFlight(results);
+        }
+
+        private async Task ShowOwnerResults(IEnumerable<OwnerResult> ownerResults, string flightCode)
+        {
+            Table table = new();
+            table.AddColumn("Naam");
+            table.AddColumn("Punten");
+
+            foreach (OwnerResult ownerResult in ownerResults)
+                table.AddRow(ownerResult.Name, ownerResult.GetPoints().ToString());
+
+            AnsiConsole.Write(table);
+
+            var shouldStoreResults = AnsiConsole.Prompt(
+                new TextPrompt<bool>("Resultaten opslaan.")
+                    .AddChoice(true)
+                    .AddChoice(false)
+                    .WithConverter(choice => choice ? "j" : "n"));
+
+            if (!shouldStoreResults)
+                return;
+
+            StandingsYear currentStandings = await _standingsStore.GetByYearAsync(_yearStore.Year);
+            StandingsYear updatedStandings = _calculator.GetUpdatedStandingsFromResults(currentStandings, flightCode, ownerResults);
+            await _standingsStore.SaveAsync(updatedStandings);
         }
     }
 }

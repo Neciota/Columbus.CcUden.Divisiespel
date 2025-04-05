@@ -2,6 +2,7 @@
 using Columbus.CcUden.Divisiespel.Console;
 using Columbus.CcUden.Divisiespel.Console.Pages;
 using Columbus.CcUden.Divisiespel.Fetcher;
+using Columbus.CcUden.Divisiespel.Writer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,6 +12,7 @@ HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddScoped<IHtmlParser, HtmlParser>();
 builder.Services.AddScoped<CompuClubFetcher>();
 builder.Services.AddScoped<IStandingsCalculator, StandingsCalculator>();
+builder.Services.AddScoped<StandingsStore>();
 #endregion
 
 #region Stores
