@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Columbus.CcUden.Divisiespel.Models\Columbus.CcUden.Divisiespel.Models.csproj" />
+  </ItemGroup>
+
 </Project>

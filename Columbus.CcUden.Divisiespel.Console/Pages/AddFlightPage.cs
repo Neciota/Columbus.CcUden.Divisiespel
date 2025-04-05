@@ -2,6 +2,7 @@
 using Columbus.CcUden.Divisiespel.Fetcher;
 using Columbus.CcUden.Divisiespel.Models;
 using Spectre.Console;
+using System.IO;
 using System.Web;
 
 namespace Columbus.CcUden.Divisiespel.Console.Pages
@@ -20,17 +21,29 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
         {
             await base.ShowAsync();
 
-            bool hasSession = false;
+            await InitializeSessionAsync();
+            (string flightCode, string path) = await GetFlightPathAsync();
+            IEnumerable<OwnerResult> ownerResults = await GetOwnerResultsAsync(flightCode, path);
+
+            //foreach (OwnerResult ownerResult in ownerResults)
+            //    Console.WriteLine($"{ownerResult.Name,-20} {ownerResult.Occurences,-1} {ownerResult.HasDesignated}");
+        }
+
+        private async Task InitializeSessionAsync()
+        {
             await AnsiConsole.Status()
                 .StartAsync("CompuClub laden...", async ctx =>
                 {
                     ctx.Spinner(Spinner.Known.Star);
                     ctx.SpinnerStyle(Style.Parse("green"));
 
-                    hasSession = await _fetcher.TryUpdateSessionIdAsync();
+                    await _fetcher.TryUpdateSessionIdAsync();
                     await _fetcher.SetYear(_yearStore.Year);
                 });
+        }
 
+        private async Task<(string, string)> GetFlightPathAsync()
+        {
             IEnumerable<string> paths = [];
             await AnsiConsole.Status()
                 .StartAsync("Vluchten laden...", async ctx =>
@@ -52,21 +65,22 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                     .PageSize(10)
                     .MoreChoicesText("[grey](Beweeg omhoog/omlaag om meer vluchtcodes te zien.)[/]")
                     .AddChoices(flightCodes));
-            string selectedPath = paths.First(p => p.Contains($"vlc={selectedFlightCode}", StringComparison.InvariantCultureIgnoreCase));
+            return (selectedFlightCode, paths.First(p => p.Contains($"vlc={selectedFlightCode}", StringComparison.InvariantCultureIgnoreCase)));
+        }
 
+        private async Task<IEnumerable<OwnerResult>> GetOwnerResultsAsync(string flightCode, string path)
+        {
             IEnumerable<ResultLine> results = [];
             await AnsiConsole.Status()
-                .StartAsync($"Vlucht {selectedFlightCode} laden...", async ctx =>
+                .StartAsync($"Vlucht {flightCode} laden...", async ctx =>
                 {
                     ctx.Spinner(Spinner.Known.Star);
                     ctx.SpinnerStyle(Style.Parse("green"));
 
-                    results = await _fetcher.GetResults(selectedPath);
+                    results = await _fetcher.GetResults(path);
                 });
 
-            IEnumerable<OwnerResult> ownerResults = _calculator.GetOwnerResultsFromSingleFlight(results);
-            //foreach (OwnerResult ownerResult in ownerResults)
-            //    Console.WriteLine($"{ownerResult.Name,-20} {ownerResult.Occurences,-1} {ownerResult.HasDesignated}");
+            return _calculator.GetOwnerResultsFromSingleFlight(results);
         }
     }
 }
