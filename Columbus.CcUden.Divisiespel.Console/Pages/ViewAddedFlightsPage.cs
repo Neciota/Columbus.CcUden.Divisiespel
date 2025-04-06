@@ -17,7 +17,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             Table table = new();
             table.AddColumn("Vluchten:");
 
-            foreach (FlightCode flight in standingsYear.OwnerResultByFlight.Keys)
+            foreach (FlightCode flight in standingsYear.GetFlights())
                 table.AddRow(flight.ToString());
 
             AnsiConsole.Write(table);
