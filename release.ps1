@@ -5,8 +5,8 @@ param (
     [switch]$OnlyBuild=$false
 )
 
-$appName = "WpfApplication" # 👈 Replace with your application project name.
-$projDir = "WpfApplication" # 👈 Replace with your project directory (where .csproj resides).
+$appName = "Columbus.CcUden.Divisiespel.Console"
+$projDir = "Columbus.CcUden.Divisiespel.Console"
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
