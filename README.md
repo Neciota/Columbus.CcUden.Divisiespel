@@ -5,3 +5,7 @@ This project is intended to fetch flight results from the [CompuClub](https://ww
 ## Points
 Each owner scores once for each pigeon in the prize results of a flight, up to a maximum of five points.
 Additionally, they score a point for at least one of their top two ranked pigeons appearing in the prize results.
+
+## Installation
+The console application can be installed from [GitHub](https://neciota.github.io/Columbus.CcUden.Divisiespel/Columbus.CcUden.Divisiespel.Console.application).
+The application will automatically check for updates if you have an internet connection.
