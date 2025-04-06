@@ -19,17 +19,5 @@ namespace Columbus.CcUden.Divisiespel.Calculator
 
             return ownerResults.Values;
         }
-
-        public StandingsYear GetUpdatedStandingsFromResults(StandingsYear standingsYear, FlightCode flightCode, IEnumerable<OwnerResult> ownerResults)
-        {
-            var newResultsPerFlight = standingsYear.OwnerResultByFlight.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            newResultsPerFlight.Add(flightCode, ownerResults);
-
-            return new StandingsYear
-            {
-                Year = standingsYear.Year,
-                OwnerResultByFlight = newResultsPerFlight,
-            };
-        }
     }
 }

@@ -104,9 +104,9 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             if (!shouldStoreResults)
                 return;
 
-            StandingsYear currentStandings = await _standingsStore.GetByYearAsync(_yearStore.Year);
-            StandingsYear updatedStandings = _calculator.GetUpdatedStandingsFromResults(currentStandings, flightCode, ownerResults);
-            await _standingsStore.SaveAsync(updatedStandings);
+            StandingsYear standings = await _standingsStore.GetByYearAsync(_yearStore.Year);
+            standings.OwnerResultByFlight.Add(flightCode, ownerResults);
+            await _standingsStore.SaveAsync(standings);
         }
     }
 }

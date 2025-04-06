@@ -24,8 +24,8 @@ builder.Services.AddScoped<Router>();
 builder.Services.AddTransient<HomePage>();
 builder.Services.AddTransient<AddFlightPage>();
 builder.Services.AddTransient<EditYearPage>();
-builder.Services.AddTransient<ExcludedOwnersPage>();
 builder.Services.AddTransient<ViewAddedFlightsPage>();
+builder.Services.AddTransient<ViewLeaguesPage>();
 builder.Services.AddTransient<ViewStandingsPage>();
 #endregion
 

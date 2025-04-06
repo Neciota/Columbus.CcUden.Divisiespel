@@ -22,18 +22,21 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                 table.AddColumn(flight.ToString());
             table.AddColumn("Totaal");
 
-            string[] allOwners = standingsYear.GetAllOwners();
             Dictionary<(FlightCode Flight, string Name), int> pointsByOwnerFlight = standingsYear.GetPointsByOwnerAndFlight();
-            foreach (var owner in allOwners)
+            foreach (League league in standingsYear.Leagues)
             {
-                IEnumerable<int> points = flights.Select(flight => pointsByOwnerFlight.GetValueOrDefault((flight, owner), 0));
-                string[] rowData = points
-                    .Append(points.Sum())
-                    .Select(p => p.ToString())
-                    .Prepend(owner)
-                    .ToArray();
+                table.AddRow($"[green]{league.Name}[/]");
+                foreach (var owner in league.Owners)
+                {
+                    IEnumerable<int> points = flights.Select(flight => pointsByOwnerFlight.GetValueOrDefault((flight, owner), 0));
+                    string[] rowData = points
+                        .Append(points.Sum())
+                        .Select(p => p.ToString())
+                        .Prepend(owner)
+                        .ToArray();
 
-                table.AddRow(rowData);
+                    table.AddRow(rowData);
+                }
             }
 
             AnsiConsole.Write(table);

@@ -8,7 +8,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
         private const string SEE_CURRENT_STANDINGS = "Huidige stand bekijken.";
         private const string ADD_FLIGHT = "Vlucht toevoegen.";
         private const string EDIT_YEAR = "Jaartal aanpassen.";
-        private const string SEE_EXCLUDED_OWNERS = "Uitgesloten liefhebbers bekijken.";
+        private const string VIEW_LEAGUES = "Divisies aanpassen.";
         private const string EXIT = "Afsluiten.";
 
         private bool _keepAlive = true;
@@ -28,7 +28,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                         SEE_CURRENT_STANDINGS,
                         ADD_FLIGHT,
                         EDIT_YEAR,
-                        SEE_EXCLUDED_OWNERS,
+                        VIEW_LEAGUES,
                         EXIT
                     ));
 
@@ -38,7 +38,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                     SEE_CURRENT_STANDINGS => _router.NavigateToAsync<ViewStandingsPage>(),
                     ADD_FLIGHT => _router.NavigateToAsync<AddFlightPage>(),
                     EDIT_YEAR => _router.NavigateToAsync<EditYearPage>(),
-                    SEE_EXCLUDED_OWNERS => _router.NavigateToAsync<ExcludedOwnersPage>(),
+                    VIEW_LEAGUES => _router.NavigateToAsync<ViewLeaguesPage>(),
                     EXIT => ShutdownAsync(),
                     _ => throw new NotImplementedException($"No implementation for option {result}.")
                 };

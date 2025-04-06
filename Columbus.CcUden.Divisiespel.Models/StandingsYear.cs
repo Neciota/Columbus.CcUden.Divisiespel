@@ -10,9 +10,9 @@
         /// </summary>
         public int Year { get; set; }
         /// <summary>
-        /// Owners that may appear in flight results but who do not participate in the championship.
+        /// The divisions in which the owners are placed.
         /// </summary>
-        public List<string> ExcludedOwners { get; set; } = [];
+        public List<League> Leagues { get; set; } = [];
         /// <summary>
         /// The results per flight.
         /// </summary>
@@ -22,17 +22,12 @@
             .Keys
             .Order()
             .ToArray();
-        public string[] GetAllOwners() => OwnerResultByFlight
-            .SelectMany(results => results.Value.Select(result => result.Name))
+        public string[] GetAllOwners() => Leagues
+            .SelectMany(league => league.Owners)
             .Distinct()
-            .Except(ExcludedOwners)
-            .Order()
             .ToArray();
         public Dictionary<(FlightCode Flight, string OwnerName), int> GetPointsByOwnerAndFlight() => OwnerResultByFlight
-            .SelectMany(flight => flight.Value
-                .Where(result => !ExcludedOwners.Contains(result.Name))
-                .Select(result => (flight.Key, result))
-            )
+            .SelectMany(flight => flight.Value.Select(result => (flight.Key, result)))
             .ToDictionary(x => (x.Key, x.result.Name), x => x.result.GetPoints());
     }
 }
