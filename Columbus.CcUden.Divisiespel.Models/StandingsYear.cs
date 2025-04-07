@@ -22,12 +22,27 @@
             .Keys
             .Order()
             .ToArray();
+
         public Owner[] GetAllOwners() => Leagues
             .SelectMany(league => league.Owners)
             .Distinct()
             .ToArray();
+
         public Dictionary<(FlightCode, Owner), int> GetPointsByOwnerAndFlight() => OwnerResultByFlight
             .SelectMany(flight => flight.Value.Select(result => (flight.Key, result)))
             .ToDictionary(x => (x.Key, x.result.Owner), x => x.result.GetPoints());
+
+        public Owner[] GetUnregisteredOwners()
+        {
+            HashSet<Owner> ownersInLeagues = Leagues.SelectMany(league => league.Owners)
+                .ToHashSet();
+
+            return OwnerResultByFlight
+                .SelectMany(ownerFlight => ownerFlight.Value)
+                .Select(ownerResult => ownerResult.Owner)
+                .Distinct()
+                .Where(owner => !ownersInLeagues.Contains(owner))
+                .ToArray();
+        }
     }
 }

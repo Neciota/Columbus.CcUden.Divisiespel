@@ -27,6 +27,7 @@ builder.Services.AddTransient<EditYearPage>();
 builder.Services.AddTransient<ViewAddedFlightsPage>();
 builder.Services.AddTransient<ViewLeaguesPage>();
 builder.Services.AddTransient<ViewStandingsPage>();
+builder.Services.AddTransient<ViewUnregisteredOwners>();
 #endregion
 
 var host = builder.Build();

@@ -9,6 +9,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
         private const string ADD_FLIGHT = "Vlucht toevoegen.";
         private const string EDIT_YEAR = "Jaartal aanpassen.";
         private const string VIEW_LEAGUES = "Divisies aanpassen.";
+        private const string VIEW_UNREGISTERED = "Liefhebbers zonder divisies bekijken.";
         private const string EXIT = "Afsluiten.";
 
         private bool _keepAlive = true;
@@ -29,6 +30,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                         ADD_FLIGHT,
                         EDIT_YEAR,
                         VIEW_LEAGUES,
+                        VIEW_UNREGISTERED,
                         EXIT
                     ));
 
@@ -39,6 +41,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                     ADD_FLIGHT => _router.NavigateToAsync<AddFlightPage>(),
                     EDIT_YEAR => _router.NavigateToAsync<EditYearPage>(),
                     VIEW_LEAGUES => _router.NavigateToAsync<ViewLeaguesPage>(),
+                    VIEW_UNREGISTERED => _router.NavigateToAsync<ViewUnregisteredOwners>(),
                     EXIT => ShutdownAsync(),
                     _ => throw new NotImplementedException($"No implementation for option {result}.")
                 };
