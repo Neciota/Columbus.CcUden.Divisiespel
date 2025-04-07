@@ -20,10 +20,13 @@ namespace Columbus.CcUden.Divisiespel.Persistence
             if (File.Exists(saveFile))
             {
                 await using FileStream saveStream = File.OpenRead(saveFile);
-                _loadedStandings = await JsonSerializer.DeserializeAsync<StandingsYear>(saveStream);
+                _loadedStandings = await JsonSerializer.DeserializeAsync<StandingsYear>(saveStream) ?? new StandingsYear { Year = year };
+            }
+            else
+            {
+                _loadedStandings = new StandingsYear { Year = year };
             }
 
-            _loadedStandings ??= new StandingsYear { Year = year };
             return _loadedStandings;
         }
 

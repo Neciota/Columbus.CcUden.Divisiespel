@@ -11,6 +11,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
 
         private const string CREATE_LEAGUE = "Divisie toevoegen.";
         private const string DELETE_LEAGUE = "Divisie verwijderen.";
+        private const string IMPORT_LEAGUES = "Divisies importeren.";
         private const string CREATE_OWNER = "Liefhebber toevoegen.";
         private const string DELETE_OWNER = "Liefhebber verwijderen.";
         private const string PROMOTE_OWNER = "Liefhebber promoveren.";
@@ -33,6 +34,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                         .AddChoices(
                             CREATE_LEAGUE,
                             DELETE_LEAGUE,
+                            IMPORT_LEAGUES,
                             CREATE_OWNER,
                             DELETE_OWNER,
                             PROMOTE_OWNER,
@@ -44,6 +46,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                 {
                     CREATE_LEAGUE => CreateLeagueAsync(standingsYear),
                     DELETE_LEAGUE => DeleteLeagueAsync(standingsYear),
+                    IMPORT_LEAGUES => ImportLeaguesAsync(standingsYear),
                     CREATE_OWNER => CreateOwnerAsync(standingsYear),
                     DELETE_OWNER => DeleteOwnerAsync(standingsYear),
                     PROMOTE_OWNER => PromoteOwnerAsync(standingsYear),
@@ -97,6 +100,16 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
 
             standingsYear.Leagues.Remove(selectedLeague);
             await _standingsStore.SaveAsync(standingsYear);
+        }
+
+        private async Task ImportLeaguesAsync(StandingsYear currentStandingsYear)
+        {
+            int year = AnsiConsole.Prompt(new TextPrompt<int>("Jaar:"));
+
+            StandingsYear oldStandingsYear = await _standingsStore.GetByYearAsync(year);
+            currentStandingsYear.Leagues = oldStandingsYear.Leagues;
+
+            await _standingsStore.SaveAsync(currentStandingsYear);
         }
 
         private async Task CreateOwnerAsync(StandingsYear standingsYear)
