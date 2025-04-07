@@ -91,7 +91,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             table.AddColumn("Punten");
 
             foreach (OwnerResult ownerResult in ownerResults)
-                table.AddRow(ownerResult.Name, ownerResult.GetPoints().ToString());
+                table.AddRow(ownerResult.Owner.ToString(), ownerResult.GetPoints().ToString());
 
             AnsiConsole.Write(table);
 

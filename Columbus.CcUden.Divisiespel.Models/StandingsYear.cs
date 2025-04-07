@@ -22,12 +22,12 @@
             .Keys
             .Order()
             .ToArray();
-        public string[] GetAllOwners() => Leagues
+        public Owner[] GetAllOwners() => Leagues
             .SelectMany(league => league.Owners)
             .Distinct()
             .ToArray();
-        public Dictionary<(FlightCode Flight, string OwnerName), int> GetPointsByOwnerAndFlight() => OwnerResultByFlight
+        public Dictionary<(FlightCode, Owner), int> GetPointsByOwnerAndFlight() => OwnerResultByFlight
             .SelectMany(flight => flight.Value.Select(result => (flight.Key, result)))
-            .ToDictionary(x => (x.Key, x.result.Name), x => x.result.GetPoints());
+            .ToDictionary(x => (x.Key, Name:x.result.Owner), x => x.result.GetPoints());
     }
 }

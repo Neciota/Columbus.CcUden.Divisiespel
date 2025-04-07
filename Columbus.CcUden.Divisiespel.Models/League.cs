@@ -4,9 +4,9 @@
     {
         public required int Rank { get; set; }
         public required string Name { get; set; }
-        public List<string> Owners { get; set; } = [];
+        public List<Owner> Owners { get; set; } = [];
 
-        public bool AddOwner(string owner)
+        public bool AddOwner(Owner owner)
         {
             if (Owners.Contains(owner))
                 return false;
@@ -15,7 +15,7 @@
             return true;
         }
 
-        public bool RemoveOwner(string owner) => Owners.Remove(owner);
+        public bool RemoveOwner(Owner owner) => Owners.Remove(owner);
 
         public override string ToString() => Name;
     }

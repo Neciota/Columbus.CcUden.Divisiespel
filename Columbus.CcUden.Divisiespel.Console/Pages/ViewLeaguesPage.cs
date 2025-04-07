@@ -67,7 +67,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
 
             int mostOwners = standingsYear.Leagues.Count > 0 ? standingsYear.Leagues.Max(league => league.Owners.Count) : 0;
             for (int i = 0; i < mostOwners; i++)
-                table.AddRow(standingsYear.Leagues.Select(league => i < league.Owners.Count ? league.Owners[i] : string.Empty).ToArray());
+                table.AddRow(standingsYear.Leagues.Select(league => i < league.Owners.Count ? league.Owners[i].ToString() : string.Empty).ToArray());
 
             AnsiConsole.Write(table);
         }
@@ -114,7 +114,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
 
         private async Task CreateOwnerAsync(StandingsYear standingsYear)
         {
-            var name = AnsiConsole.Prompt(new TextPrompt<string>("Naam van de liefhebber?"));
+            Owner name = AnsiConsole.Prompt(new TextPrompt<Owner>("Naam van de liefhebber?"));
 
             League selectedLeague = AnsiConsole.Prompt(
                 new SelectionPrompt<League>()
@@ -131,8 +131,8 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
 
         private async Task DeleteOwnerAsync(StandingsYear standingsYear)
         {
-            string selectedOwner = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
+            Owner selectedOwner = AnsiConsole.Prompt(
+                new SelectionPrompt<Owner>()
                     .Title("Selecteer een divisie:")
                     .PageSize(10)
                     .MoreChoicesText("[grey](Beweeg omhoog/omlaag om meer divisies te zien.)[/]")
@@ -150,14 +150,14 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
         {
             await base.ShowAsync();
 
-            string selectedOwner = new(AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
+            Owner selectedOwner = AnsiConsole.Prompt(
+                new SelectionPrompt<Owner>()
                     .Title("Selecteer een liefhebber:")
                     .PageSize(10)
                     .MoreChoicesText("[grey](Beweeg omhoog/omlaag om meer liefhebbers te zien.)[/]")
                     .AddChoices(standingsYear.GetAllOwners())
                     .EnableSearch()
-                    .SearchPlaceholderText("Type om te zoeken.")));
+                    .SearchPlaceholderText("Type om te zoeken."));
 
             League currentLeague = standingsYear.Leagues.First(league => league.Owners.Contains(selectedOwner));
             int index = standingsYear.Leagues.IndexOf(currentLeague);
@@ -174,14 +174,14 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
         {
             await base.ShowAsync();
 
-            string selectedOwner = new(AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
+            Owner selectedOwner = AnsiConsole.Prompt(
+                new SelectionPrompt<Owner>()
                     .Title("Selecteer een liefhebber:")
                     .PageSize(10)
                     .MoreChoicesText("[grey](Beweeg omhoog/omlaag om meer liefhebbers te zien.)[/]")
                     .AddChoices(standingsYear.GetAllOwners())
                     .EnableSearch()
-                    .SearchPlaceholderText("Type om te zoeken.")));
+                    .SearchPlaceholderText("Type om te zoeken."));
 
             League currentLeague = standingsYear.Leagues.First(league => league.Owners.Contains(selectedOwner));
             int index = standingsYear.Leagues.IndexOf(currentLeague);

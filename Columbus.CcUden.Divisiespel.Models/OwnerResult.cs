@@ -3,12 +3,12 @@
     /// <summary>
     /// Models the total entries of an owner in a single result.
     /// </summary>
-    public class OwnerResult(string name)
+    public class OwnerResult(Owner owner)
     {
         /// <summary>
         /// Name as it appears on the result.
         /// </summary>
-        public string Name { get; set; } = name;
+        public Owner Owner { get; set; } = owner;
         /// <summary>
         /// How often the owner occurs in the result.
         /// </summary>

@@ -22,7 +22,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                 table.AddColumn(flight.ToString());
             table.AddColumn("Totaal");
 
-            Dictionary<(FlightCode Flight, string Name), int> pointsByOwnerFlight = standingsYear.GetPointsByOwnerAndFlight();
+            Dictionary<(FlightCode Flight, Owner Owner), int> pointsByOwnerFlight = standingsYear.GetPointsByOwnerAndFlight();
             foreach (League league in standingsYear.Leagues)
             {
                 table.AddRow($"[green]{league.Name}[/]");
@@ -32,7 +32,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                     string[] rowData = points
                         .Append(points.Sum())
                         .Select(p => p.ToString())
-                        .Prepend(owner)
+                        .Prepend(owner.ToString())
                         .ToArray();
 
                     table.AddRow(rowData);
