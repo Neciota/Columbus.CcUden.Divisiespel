@@ -16,6 +16,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
 
             Table table = new();
 
+            table.AddColumn(string.Empty);
             table.AddColumn("Liefhebber");
             FlightCode[] flights = standingsYear.GetFlights();
             foreach (var flight in flights)
@@ -25,17 +26,24 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             Dictionary<(FlightCode Flight, Owner Owner), int> pointsByOwnerFlight = standingsYear.GetPointsByOwnerAndFlight();
             foreach (League league in standingsYear.Leagues)
             {
-                table.AddRow($"[green]{league.Name}[/]");
-                foreach (var owner in league.Owners)
+                Dictionary<Owner, int> totalPointsByLeagueOwners = league.Owners
+                    .Select(owner => (owner, pointsByOwnerFlight.Where(pof => pof.Key.Owner == owner)))
+                    .ToDictionary(op => op.owner, op => op.Item2.Sum(pof => pof.Value));
+
+                int leagueIndex = 1;
+                table.AddRow(string.Empty, $"[green]{league.Name}[/]");
+                foreach (var ownerPoints in totalPointsByLeagueOwners.OrderByDescending(po => po.Value))
                 {
-                    IEnumerable<int> points = flights.Select(flight => pointsByOwnerFlight.GetValueOrDefault((flight, owner), 0));
+                    IEnumerable<int> points = flights.Select(flight => pointsByOwnerFlight.GetValueOrDefault((flight, ownerPoints.Key), 0));
                     string[] rowData = points
-                        .Append(points.Sum())
-                        .Select(p => p.ToString())
-                        .Prepend(owner.ToString())
+                        .Append(ownerPoints.Value)
+                        .Select(p => $"{(leagueIndex % 2 == 0 ? "[white]" : "[grey]")}{p}[/]")
+                        .Prepend($"{(leagueIndex % 2 == 0 ? "[white]" : "[grey]")}{ownerPoints.Key}[/]")
+                        .Prepend($"{(leagueIndex % 2 == 0 ? "[white]" : "[grey]")}{leagueIndex}[/]")
                         .ToArray();
 
                     table.AddRow(rowData);
+                    leagueIndex++;
                 }
             }
 
