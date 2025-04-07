@@ -64,6 +64,8 @@ namespace Columbus.CcUden.Divisiespel.Fetcher
                         .Select(value => Convert.ToInt32(value))
                         .ToArray();
 
+                    double.TryParse(sanitizedLine.Substring(114, 6).Trim(), out double points);
+
                     return new ResultLine
                     {
                         Position = Convert.ToInt32(sanitizedLine.Substring(1, 5).Trim()),
@@ -76,7 +78,7 @@ namespace Columbus.CcUden.Divisiespel.Fetcher
                         Distance = Convert.ToDouble(sanitizedLine.Substring(84, 8).Trim()),
                         Arrival = new TimeOnly(arrivalTimeComponents[0], arrivalTimeComponents[1], arrivalTimeComponents[2]),
                         Speed = Convert.ToDouble(sanitizedLine.Substring(104, 8).Trim()),
-                        Points = Convert.ToDouble(sanitizedLine.Substring(114, 6).Trim()),
+                        Points = points,
                         TimeDifference = new TimeSpan(timeDifferenceComponents[0], timeDifferenceComponents[1], timeDifferenceComponents[2])
                     };
                 })
@@ -86,6 +88,9 @@ namespace Columbus.CcUden.Divisiespel.Fetcher
         private static List<string> GetPagePaths(HtmlDocument htmlDocument)
         {
             HtmlNode pageOverviewNode = htmlDocument.DocumentNode.SelectSingleNode("//*[@id=\"ebul_cbhoriz_menu_5\"]");
+            if (pageOverviewNode is null)
+                return [];
+
             return pageOverviewNode.Descendants("a")
                 .Select(a => a.GetAttributeValue("href", string.Empty))
                 .Where(href => !string.IsNullOrEmpty(href))
