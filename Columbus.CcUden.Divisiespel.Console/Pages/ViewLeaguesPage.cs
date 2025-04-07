@@ -114,7 +114,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
 
         private async Task CreateOwnerAsync(StandingsYear standingsYear)
         {
-            Owner name = AnsiConsole.Prompt(new TextPrompt<Owner>("Naam van de liefhebber?"));
+            Owner name = new(AnsiConsole.Prompt(new TextPrompt<string>("Naam van de liefhebber?")));
 
             League selectedLeague = AnsiConsole.Prompt(
                 new SelectionPrompt<League>()

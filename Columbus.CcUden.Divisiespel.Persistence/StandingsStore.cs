@@ -6,6 +6,10 @@ namespace Columbus.CcUden.Divisiespel.Persistence
     public class StandingsStore()
     {
         private readonly string _saveFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Columbus.CcUden.Divisiespel");
+        private readonly JsonSerializerOptions _serializerOptions = new()
+        {
+            WriteIndented = true,
+        };
         private StandingsYear? _loadedStandings;
 
         public async Task<StandingsYear> GetByYearAsync(int year)
@@ -20,7 +24,7 @@ namespace Columbus.CcUden.Divisiespel.Persistence
             if (File.Exists(saveFile))
             {
                 await using FileStream saveStream = File.OpenRead(saveFile);
-                _loadedStandings = await JsonSerializer.DeserializeAsync<StandingsYear>(saveStream) ?? new StandingsYear { Year = year };
+                _loadedStandings = await JsonSerializer.DeserializeAsync<StandingsYear>(saveStream, _serializerOptions) ?? new StandingsYear { Year = year };
             }
             else
             {
@@ -40,7 +44,7 @@ namespace Columbus.CcUden.Divisiespel.Persistence
             saveStream.SetLength(0);
             await saveStream.FlushAsync();
 
-            await JsonSerializer.SerializeAsync(saveStream, _loadedStandings);
+            await JsonSerializer.SerializeAsync(saveStream, _loadedStandings, _serializerOptions);
         }
 
         private string GetFilePathForYear(int year) => Path.Combine(_saveFolder, $"database_{year}.json");

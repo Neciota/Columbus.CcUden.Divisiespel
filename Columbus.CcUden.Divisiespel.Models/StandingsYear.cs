@@ -28,6 +28,6 @@
             .ToArray();
         public Dictionary<(FlightCode, Owner), int> GetPointsByOwnerAndFlight() => OwnerResultByFlight
             .SelectMany(flight => flight.Value.Select(result => (flight.Key, result)))
-            .ToDictionary(x => (x.Key, Name:x.result.Owner), x => x.result.GetPoints());
+            .ToDictionary(x => (x.Key, x.result.Owner), x => x.result.GetPoints());
     }
 }

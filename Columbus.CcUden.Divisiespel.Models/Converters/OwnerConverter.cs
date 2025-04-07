@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Columbus.CcUden.Divisiespel.Models.Converters
 {
-    internal class OwnerConverter : JsonConverter<Owner>
+    public class OwnerConverter : JsonConverter<Owner>
     {
         public override Owner Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
