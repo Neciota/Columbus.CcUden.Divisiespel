@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Columbus.CcUden.Divisiespel.Console.exe" version="0.3.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Launcher" version="8.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Launcher.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="4" minorVersion="10" buildNumber="0" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Launcher.exe" size="16384">
+      <assemblyIdentity name="Launcher" version="8.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>mN7zXI+cafVpSFMXUORvTsdLwDbIeeg/nv1dHUt0b+s=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Columbus.CcUden.Divisiespel.Calculator.pdb" size="11964">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>q+XyszAAQ67XrfTag6io+Lt5giJiBVM9EbHizhdomIg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Columbus.CcUden.Divisiespel.Console.exe" size="64984023">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>4SyKIZbxLji0jb9Ifo789NewsoYbNceRsWTBoVJgfwA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Columbus.CcUden.Divisiespel.Fetcher.pdb" size="17604">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>OO4Rc+UMAqtXdrWaI71qwaxkaZ7RkcXCYy1+OJd8oRM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Columbus.CcUden.Divisiespel.Models.pdb" size="15232">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>XYaWzOIqVY7RmewzgKUDb3AYMq0tKds9/P32T7bk9fY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Columbus.CcUden.Divisiespel.Persistence.pdb" size="12276">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>xs6siTavO8oEak9gHT0pUXBHcmN0IBgKAyZ4bw3dkKM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Columbus.CcUden.Divisiespel.Writer.pdb" size="13196">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jjFGD1bPaBkvIQ6wmIW2xRcKoKfG0mKYsZGf3I0zOJo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-Black.ttf" size="664748">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>gIxig5xi28595omvdgNmb8f4uB4N9TfYpSEsh1gNQzc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-BlackItalic.ttf" size="698264">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>MhT3W/lng6VxvSUzjIZ8Zp58XnwIoifxintjdm1ubL4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-Bold.ttf" size="656544">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>igqs510zeU7s5LKBh7/B3wu9KIi12KVuAXiMjWXRa+E=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-BoldItalic.ttf" size="698364">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>YsG38NLnS0WWAVTDUg78M3tVPbCWG/3JUNVhgzRZbMg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-ExtraBold.ttf" size="613920">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>YQGN5iva+Q1KyAsdU8XBMHVsjpIZrqPSdz/JvVhpr5c=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-ExtraBoldItalic.ttf" size="671876">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>pCs4S5w3kTphAj46R8B/6tJud2Enu8nmoMlv5BMIk3Q=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-ExtraLight.ttf" size="626624">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>mJmJtIHbXfCCfZDFH9CNAk/nvE42cEbiWEoNOwSHk20=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-ExtraLightItalic.ttf" size="653640">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>/FZSYlC5tkzgkIxSNQsD6RuEr+ywj9KDShLle5Gr2zE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-Italic.ttf" size="722900">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>45nETv4ThxAFMdJsfkgAxdEiUbiQ1mVKMJjHxnnLF4Y=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-Light.ttf" size="643884">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>zyp3RQO69BjVhPSZZ70WDh4D8IfBOyVgLygCTsd4jwg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-LightItalic.ttf" size="657552">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>cA5nIv0UoQ52RjR6axTEhtTDZKNzumHHDgtczueBFjU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-Medium.ttf" size="636396">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>06wYKmgz4AV0XddWefutCBwLElNd9Ok62O1XgXoxozg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-MediumItalic.ttf" size="694924">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>7Lzmz/pC2KZ6/rJ6nW6F1RXoFIHUss7OmJ6DOkgEhAU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-Regular.ttf" size="656568">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>1jbkaDIx+THtoiLViOlE0IK/0726AvkovuRhwPGFslE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-SemiBold.ttf" size="668548">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>cbi33svnWoge0me+U51AK9HpQgt5lliq2k4NG9WvgDw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-SemiBoldItalic.ttf" size="697364">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Wt62szTY+5nvBTvAUrlSdz1UQxXg4dZooSwM6L1RN1w=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-Thin.ttf" size="584056">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ZjxVv+mjgnD/9E2ic79NeS6vw+fhIB9iwwZMrYDF1ec=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\Lato-ThinItalic.ttf" size="608716">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>5ehuIZzmmHsXVHDZTVd1Ojh9GGC2NdpjJ6YOjRmjO+s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="LatoFont\OFL.txt" size="4500">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>FLhgn9goHLlhcw3n07KWTcxuDjledZsUIuUuOaD9xrI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="libgcc_s_dw2-1.dll" size="209128">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>3JTXlH9i5eMg1NlAJ3i8ADhccJfW4GNmw7lDk/PEaBo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="libstdc++-6.dll" size="2567532">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ViTy5jWde51uz2ZU1x6BBTEwwgGuMZrnxf/TlEH/Q5s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="libwinpthread-1.dll" size="72751">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>P5SxOXJQeqaxztFRb8dxmSKTTwVjcytiM1qgPPGDxMc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="qpdf.dll" size="7071744">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>6f/AbJda6/1Ar2941AZm0/K9xUmE13w+Fp4l1tR8+fI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="QuestPdfSkia.dll" size="4926464">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jvaGx23PTX0T0/rjCw5GlMq7XYeCRK+fy68s0okfih4=</dsig:DigestValue>
+    </hash>
+  </file>
+</asmv1:assembly>
