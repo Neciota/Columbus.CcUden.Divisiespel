@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Columbus.CcUden.Divisiespel.Fetcher\Columbus.CcUden.Divisiespel.Fetcher.csproj" />
     <ProjectReference Include="..\Columbus.CcUden.Divisiespel.Models\Columbus.CcUden.Divisiespel.Models.csproj" />
     <ProjectReference Include="..\Columbus.CcUden.Divisiespel.Persistence\Columbus.CcUden.Divisiespel.Persistence.csproj" />
+    <ProjectReference Include="..\Columbus.CcUden.Divisiespel.Writer\Columbus.CcUden.Divisiespel.Writer.csproj" />
   </ItemGroup>
 
 </Project>

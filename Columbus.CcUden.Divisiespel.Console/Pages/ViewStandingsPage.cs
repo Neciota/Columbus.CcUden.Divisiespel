@@ -26,9 +26,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
             Dictionary<(FlightCode Flight, Owner Owner), int> pointsByOwnerFlight = standingsYear.GetPointsByOwnerAndFlight();
             foreach (League league in standingsYear.Leagues)
             {
-                Dictionary<Owner, int> totalPointsByLeagueOwners = league.Owners
-                    .Select(owner => (owner, pointsByOwnerFlight.Where(pof => pof.Key.Owner == owner)))
-                    .ToDictionary(op => op.owner, op => op.Item2.Sum(pof => pof.Value));
+                Dictionary<Owner, int> totalPointsByLeagueOwners = league.GetTotalPointsByLeagueOwner(pointsByOwnerFlight);
 
                 int leagueIndex = 1;
                 table.AddRow(string.Empty, $"[green]{league.Name}[/]");

@@ -6,6 +6,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
     {
         private const string SEE_ADDED_FLIGHTS = "Reeds toegevoegde vluchten bekijken.";
         private const string SEE_CURRENT_STANDINGS = "Huidige stand bekijken.";
+        private const string EXPORT_STANDINGS = "PDF exporteren.";
         private const string ADD_FLIGHT = "Vlucht toevoegen.";
         private const string EDIT_YEAR = "Jaartal aanpassen.";
         private const string VIEW_LEAGUES = "Divisies aanpassen.";
@@ -27,6 +28,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                     .AddChoices(
                         SEE_ADDED_FLIGHTS,
                         SEE_CURRENT_STANDINGS,
+                        EXPORT_STANDINGS,
                         ADD_FLIGHT,
                         EDIT_YEAR,
                         VIEW_LEAGUES,
@@ -38,6 +40,7 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                 {
                     SEE_ADDED_FLIGHTS => _router.NavigateToAsync<ViewAddedFlightsPage>(),
                     SEE_CURRENT_STANDINGS => _router.NavigateToAsync<ViewStandingsPage>(),
+                    EXPORT_STANDINGS => _router.NavigateToAsync<ExportStandingsPage>(),
                     ADD_FLIGHT => _router.NavigateToAsync<AddFlightPage>(),
                     EDIT_YEAR => _router.NavigateToAsync<EditYearPage>(),
                     VIEW_LEAGUES => _router.NavigateToAsync<ViewLeaguesPage>(),
