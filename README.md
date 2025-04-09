@@ -9,3 +9,7 @@ Additionally, they score a point for at least one of their top two ranked pigeon
 ## Installation
 The console application can be installed from [GitHub](https://neciota.github.io/Columbus.CcUden.Divisiespel/Columbus.CcUden.Divisiespel.Console.application).
 The application will automatically check for updates if you have an internet connection.
+
+## Thanks to...
+- [Spectre.Console](https://spectreconsole.net/) for their awesome console UI.
+- [QuestPDF](https://www.questpdf.com/) for the easiest PDF creation a dev could wish for
