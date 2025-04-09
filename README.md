@@ -13,3 +13,4 @@ The application will automatically check for updates if you have an internet con
 ## Thanks to...
 - [Spectre.Console](https://spectreconsole.net/) for their awesome console UI.
 - [QuestPDF](https://www.questpdf.com/) for the easiest PDF creation a dev could wish for
+- [Jan Jones](https://janjones.me/posts/clickonce-installer-build-publish-github/) for his PowerShell script and easy deployment to Github pages.
