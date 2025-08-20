@@ -58,11 +58,16 @@ namespace Columbus.CcUden.Divisiespel.Fetcher
                         .Split('.')
                         .Select(value => Convert.ToInt32(value))
                         .ToArray();
-                    int[] timeDifferenceComponents = sanitizedLine.Substring(122, 8)
-                        .Trim()
-                        .Split(':')
-                        .Select(value => Convert.ToInt32(value))
-                        .ToArray();
+                    // For some reason Z-flights do not include time difference from 1st.
+                    int[] timeDifferenceComponents = [0, 0, 0];
+                    if (sanitizedLine.Length >= 122 + 8)
+                    {
+                        timeDifferenceComponents = sanitizedLine.Substring(122, 8)
+                            .Trim()
+                            .Split(':')
+                            .Select(value => Convert.ToInt32(value))
+                            .ToArray();
+                    }
 
                     double.TryParse(sanitizedLine.Substring(114, 6).Trim(), out double points);
 
