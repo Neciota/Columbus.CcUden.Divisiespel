@@ -36,11 +36,11 @@ namespace Columbus.CcUden.Divisiespel.Writer
             {
                 table.ColumnsDefinition(columns =>
                 {
-                    columns.ConstantColumn(40, Unit.Point);
-                    columns.RelativeColumn();
+                    columns.RelativeColumn(1f);
+                    columns.RelativeColumn(5f);
                     foreach (FlightCode _ in _flightsToShow)
-                        columns.ConstantColumn(40, Unit.Point);
-                    columns.ConstantColumn(160, Unit.Point);
+                        columns.RelativeColumn(1f);
+                    columns.RelativeColumn(2f);
                 });
 
                 table.Header(header =>
