@@ -23,20 +23,19 @@ namespace Columbus.CcUden.Divisiespel.Console.Pages
                 table.AddColumn(flight.ToString());
             table.AddColumn("Totaal");
 
+            OwnerStandings[] ownerStandings = standingsYear.GetOwnerStandingsByOwner();
             Dictionary<(FlightCode Flight, Owner Owner), int> pointsByOwnerFlight = standingsYear.GetPointsByOwnerAndFlight();
             foreach (League league in standingsYear.Leagues)
             {
-                Dictionary<Owner, int> totalPointsByLeagueOwners = league.GetTotalPointsByLeagueOwner(pointsByOwnerFlight);
-
                 int leagueIndex = 1;
                 table.AddRow(string.Empty, $"[green]{league.Name}[/]");
-                foreach (var ownerPoints in totalPointsByLeagueOwners.OrderByDescending(po => po.Value))
+                foreach (var ownerStanding in ownerStandings.Where(o => league.Owners.Contains(o.Owner)))
                 {
-                    IEnumerable<int> points = flights.Select(flight => pointsByOwnerFlight.GetValueOrDefault((flight, ownerPoints.Key), 0));
+                    IEnumerable<int> points = flights.Select(flight => pointsByOwnerFlight.GetValueOrDefault((flight, ownerStanding.Owner), 0));
                     string[] rowData = points
-                        .Append(ownerPoints.Value)
+                        .Append(ownerStanding.TotalPoints)
                         .Select(p => $"{(leagueIndex % 2 == 0 ? "[white]" : "[grey]")}{p}[/]")
-                        .Prepend($"{(leagueIndex % 2 == 0 ? "[white]" : "[grey]")}{ownerPoints.Key}[/]")
+                        .Prepend($"{(leagueIndex % 2 == 0 ? "[white]" : "[grey]")}{ownerStanding.Owner}[/]")
                         .Prepend($"{(leagueIndex % 2 == 0 ? "[white]" : "[grey]")}{leagueIndex}[/]")
                         .ToArray();
 

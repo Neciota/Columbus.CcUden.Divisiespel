@@ -52,11 +52,10 @@ namespace Columbus.CcUden.Divisiespel.Writer
                     header.Cell().Text("Totaal");
                 });
 
+                OwnerStandings[] ownerStandings = _standingsYear.GetOwnerStandingsByOwner();
                 Dictionary<(FlightCode Flight, Owner Owner), int> pointsByOwnerFlight = _standingsYear.GetPointsByOwnerAndFlight();
                 foreach (League league in _standingsYear.Leagues)
                 {
-                    Dictionary<Owner, int> totalPointsByLeagueOwners = league.GetTotalPointsByLeagueOwner(pointsByOwnerFlight);
-
                     table.Cell().Text(string.Empty);
                     table.Cell();
                     foreach (FlightCode _ in _flightsToShow)
@@ -70,13 +69,13 @@ namespace Columbus.CcUden.Divisiespel.Writer
                     table.Cell();
 
                     int leagueIndex = 1;
-                    foreach (var ownerPoints in totalPointsByLeagueOwners.OrderByDescending(po => po.Value))
+                    foreach (var ownerStanding in ownerStandings.Where(o => league.Owners.Contains(o.Owner)))
                     {
                         table.Cell().Text(leagueIndex.ToString());
-                        table.Cell().Text(ownerPoints.Key.ToString());
+                        table.Cell().Text(ownerStanding.Owner.ToString());
                         foreach (FlightCode flight in _flightsToShow)
-                            table.Cell().Text(pointsByOwnerFlight.GetValueOrDefault((flight, ownerPoints.Key), 0).ToString());
-                        table.Cell().Text(ownerPoints.Value.ToString());
+                            table.Cell().Text(pointsByOwnerFlight.GetValueOrDefault((flight, ownerStanding.Owner), 0).ToString());
+                        table.Cell().Text(ownerStanding.TotalPoints.ToString());
 
                         leagueIndex++;
                     }

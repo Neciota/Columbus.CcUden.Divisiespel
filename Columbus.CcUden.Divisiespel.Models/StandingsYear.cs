@@ -32,6 +32,22 @@
             .SelectMany(flight => flight.Value.Select(result => (flight.Key, result)))
             .ToDictionary(x => (x.Key, x.result.Owner), x => x.result.GetPoints());
 
+        public OwnerStandings[] GetOwnerStandingsByOwner() => Leagues.SelectMany(l => l.Owners)
+            .Select(GetOwnerStandingsForOwner)
+            .OrderByDescending(os => os.TotalPoints)
+            .ThenByDescending(os => os.GetAmountOfPointResults(6))
+            .ThenByDescending(os => os.GetAmountOfPointResults(5))
+            .ThenByDescending(os => os.GetAmountOfPointResults(4))
+            .ThenByDescending(os => os.GetAmountOfPointResults(3))
+            .ThenByDescending(os => os.GetAmountOfPointResults(2))
+            .ThenByDescending(os => os.GetAmountOfPointResults(1))
+            .ToArray();
+
+        private OwnerStandings GetOwnerStandingsForOwner(Owner owner) => new OwnerStandings(owner, 
+            OwnerResultByFlight
+            .SelectMany(flight => flight.Value)
+            .Where(or => or.Owner == owner));
+
         public Owner[] GetUnregisteredOwners()
         {
             HashSet<Owner> ownersInLeagues = Leagues.SelectMany(league => league.Owners)
