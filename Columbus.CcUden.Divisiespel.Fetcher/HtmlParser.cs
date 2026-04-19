@@ -11,7 +11,7 @@ namespace Columbus.CcUden.Divisiespel.Fetcher
             HtmlDocument htmlDocument = new();
             htmlDocument.LoadHtml(htmlText);
 
-            HtmlNode ccLinkNode = htmlDocument.DocumentNode.SelectSingleNode("//*[@id=\"ebul_cbmenu_afd_sam_uitklap_2\"]/li[14]/a");
+            HtmlNode ccLinkNode = htmlDocument.DocumentNode.SelectSingleNode("//*[@id=\"ebul_cbmenu_afd_sam_uitklap_2\"]/li[18]/a");
 
             return ccLinkNode.Attributes["href"].Value;
         }
@@ -53,11 +53,6 @@ namespace Columbus.CcUden.Divisiespel.Fetcher
                     // Find all <a> elements and replace them with their inner content to ensure the spacing is the same
                     string sanitizedLine = LinkElementRegex().Replace(line, "$1");
 
-                    int[] arrivalTimeComponents = sanitizedLine.Substring(94, 8)
-                        .Trim()
-                        .Split('.')
-                        .Select(value => Convert.ToInt32(value))
-                        .ToArray();
                     // For some reason Z-flights do not include time difference from 1st.
                     int[] timeDifferenceComponents = [0, 0, 0];
                     if (sanitizedLine.Length >= 122 + 8)
@@ -67,6 +62,11 @@ namespace Columbus.CcUden.Divisiespel.Fetcher
                             .Split(':')
                             .Select(value => Convert.ToInt32(value))
                             .ToArray();
+                    }
+
+                    if (!TimeOnly.TryParseExact(sanitizedLine.Substring(94, 8).Trim(), "hh:mm:ss", out TimeOnly arrivalTime))
+                    {
+                        TimeOnly.TryParseExact(sanitizedLine.Substring(94, 8).Trim(), "hhmmss", out arrivalTime);
                     }
 
                     double.TryParse(sanitizedLine.Substring(114, 6).Trim(), out double points);
@@ -81,7 +81,7 @@ namespace Columbus.CcUden.Divisiespel.Fetcher
                         PigeonId = sanitizedLine.Substring(67, 10).Trim(),
                         Rank = Convert.ToInt32(sanitizedLine.Substring(79, 3).Trim()),
                         Distance = Convert.ToDouble(sanitizedLine.Substring(84, 8).Trim()),
-                        Arrival = new TimeOnly(arrivalTimeComponents[0], arrivalTimeComponents[1], arrivalTimeComponents[2]),
+                        Arrival = arrivalTime,
                         Speed = Convert.ToDouble(sanitizedLine.Substring(104, 8).Trim()),
                         Points = points,
                         TimeDifference = new TimeSpan(timeDifferenceComponents[0], timeDifferenceComponents[1], timeDifferenceComponents[2])
